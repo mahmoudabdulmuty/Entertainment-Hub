@@ -1,0 +1,13 @@
+.nav {
+	display: flex;
+	position: fixed;
+	background-color: transparent;
+  top: 5%;
+	right: 5%;
+	z-index: 1;
+  gap: 50px;
+
+  .nav-item{
+    cursor: pointer;
+  }
+}
