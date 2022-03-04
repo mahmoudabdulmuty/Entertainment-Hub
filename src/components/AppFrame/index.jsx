@@ -1,8 +1,8 @@
-import logo from '../../assets/logo.png';
-import movie from '../../assets/movie.png';
-import shape from '../../assets/shape.png';
-import star from '../../assets/star.png';
-import tv from '../../assets/tv.png';
+import logo from '../../assets/img/logo.png';
+import movie from '../../assets/img/movie.png';
+import shape from '../../assets/img/shape.png';
+import star from '../../assets/img/star.png';
+import tv from '../../assets/img/tv.png';
 import './AppFrame.scss';
 
 const AppFrame = ({ isShow }) => {
@@ -15,29 +15,29 @@ const AppFrame = ({ isShow }) => {
 			}}
 		>
 			<li className="app-frame-item">
-				<a href="/">
+				<span>
 					<img src={logo} alt="" />
-				</a>
+				</span>
 			</li>
 			<li className="app-frame-item">
-				<a href="/">
+				<span>
 					<img src={shape} alt="" />
-				</a>
+				</span>
 			</li>
 			<li className="app-frame-item">
-				<a href="/">
+				<span>
 					<img src={movie} alt="" />
-				</a>
+				</span>
 			</li>
 			<li className="app-frame-item">
-				<a href="/">
+				<span>
 					<img src={tv} alt="" />
-				</a>
+				</span>
 			</li>
 			<li className="app-frame-item">
-				<a href="/">
+				<span>
 					<img src={star} alt="" />
-				</a>
+				</span>
 			</li>
 		</ul>
 	);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import AppFrame from '../../components/AppFrame';
 import FeaturedMovie from '../../components/FeaturedMovie/';
-import Navigation from '../../components/Navigation';
-const Home = ({ movies }) => {
+import Navigation from '../../components/Menubar';
+const Home = ({ movies, handleSubmit, handleQuery, searchQuery }) => {
 	const [isShow, setIsShow] = useState(false);
 
 	useEffect(() => {
@@ -19,14 +19,18 @@ const Home = ({ movies }) => {
 
 	return (
 		<>
-			<Navigation isShow={isShow} handleAppFrame={() => setIsShow(!isShow)} />
+			<Navigation
+				searchQuery={searchQuery}
+				handleQuery={handleQuery}
+				handleSubmit={handleSubmit}
+				isShow={isShow}
+				handleAppFrame={() => setIsShow(!isShow)}
+			/>
 			<AppFrame isShow={isShow} />
 			<div className="featured-container">
-				{movies
-					.filter((movie, idx) => idx < 3)
-					.map(({ id, ...otherProps }) => (
-						<FeaturedMovie key={id} {...otherProps} />
-					))}
+				{movies.map(({ id, ...otherProps }) => (
+					<FeaturedMovie key={id} {...otherProps} />
+				))}
 			</div>
 		</>
 	);
