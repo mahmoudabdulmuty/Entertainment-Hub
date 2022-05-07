@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import axios from "axios";
+import { Button } from '@material-ui/core';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Modal from '@material-ui/core/Modal';
+import { makeStyles } from '@material-ui/core/styles';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import {
   img_500,
   unavailable,
   unavailableLandscape,
-} from "../../config/config";
-import "./ContentModal.css";
-import { Button } from "@material-ui/core";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import Carousel from "../Carousel/Carousel";
+} from '../../config/config';
+import Carousel from '../Carousel/Carousel';
+import './ContentModal.css';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   paper: {
-    width: "90%",
-    height: "80%",
-    backgroundColor: "#39445a",
-    border: "1px solid #282c34",
+    width: '90%',
+    height: '80%',
+    backgroundColor: '#39445a',
+    border: '1px solid #282c34',
     borderRadius: 10,
-    color: "white",
+    color: 'white',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 1, 3),
   },
@@ -48,7 +48,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchData = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=900220665f77fdeb07e6cd5211522470&language=en-US`
     );
 
     setContent(data);
@@ -57,7 +57,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchVideo = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=900220665f77fdeb07e6cd5211522470&language=en-US`
     );
 
     setVideo(data.results[0]?.key);
@@ -72,16 +72,16 @@ export default function TransitionsModal({ children, media_type, id }) {
   return (
     <>
       <div
-        className="media"
-        style={{ cursor: "pointer" }}
-        color="inherit"
+        className='media'
+        style={{ cursor: 'pointer' }}
+        color='inherit'
         onClick={handleOpen}
       >
         {children}
       </div>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby='transition-modal-title'
+        aria-describedby='transition-modal-description'
         className={classes.modal}
         open={open}
         onClose={handleClose}
@@ -94,7 +94,7 @@ export default function TransitionsModal({ children, media_type, id }) {
         <Fade in={open}>
           {content && (
             <div className={classes.paper}>
-              <div className="ContentModal">
+              <div className='ContentModal'>
                 <img
                   src={
                     content.poster_path
@@ -102,7 +102,7 @@ export default function TransitionsModal({ children, media_type, id }) {
                       : unavailable
                   }
                   alt={content.name || content.title}
-                  className="ContentModal__portrait"
+                  className='ContentModal__portrait'
                 />
                 <img
                   src={
@@ -111,23 +111,23 @@ export default function TransitionsModal({ children, media_type, id }) {
                       : unavailableLandscape
                   }
                   alt={content.name || content.title}
-                  className="ContentModal__landscape"
+                  className='ContentModal__landscape'
                 />
-                <div className="ContentModal__about">
-                  <span className="ContentModal__title">
+                <div className='ContentModal__about'>
+                  <span className='ContentModal__title'>
                     {content.name || content.title} (
                     {(
                       content.first_air_date ||
                       content.release_date ||
-                      "-----"
+                      '-----'
                     ).substring(0, 4)}
                     )
                   </span>
                   {content.tagline && (
-                    <i className="tagline">{content.tagline}</i>
+                    <i className='tagline'>{content.tagline}</i>
                   )}
 
-                  <span className="ContentModal__description">
+                  <span className='ContentModal__description'>
                     {content.overview}
                   </span>
 
@@ -136,10 +136,10 @@ export default function TransitionsModal({ children, media_type, id }) {
                   </div>
 
                   <Button
-                    variant="contained"
+                    variant='contained'
                     startIcon={<YouTubeIcon />}
-                    color="secondary"
-                    target="__blank"
+                    color='secondary'
+                    target='__blank'
                     href={`https://www.youtube.com/watch?v=${video}`}
                   >
                     Watch the Trailer

@@ -5,26 +5,26 @@ import {
   Tabs,
   TextField,
   ThemeProvider,
-} from "@material-ui/core";
-import "./Search.css";
-import SearchIcon from "@material-ui/icons/Search";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import CustomPagination from "../../components/Pagination/CustomPagination";
-import SingleContent from "../../components/SingleContent/SingleContent";
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import CustomPagination from '../../components/Pagination/CustomPagination';
+import SingleContent from '../../components/SingleContent/SingleContent';
+import './Search.css';
 
 const Search = () => {
   const [type, setType] = useState(0);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
 
   const darkTheme = createMuiTheme({
     palette: {
-      type: "dark",
+      type: 'dark',
       primary: {
-        main: "#fff",
+        main: '#fff',
       },
     },
   });
@@ -32,9 +32,9 @@ const Search = () => {
   const fetchSearch = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
-          process.env.REACT_APP_API_KEY
-        }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${
+          type ? 'tv' : 'movie'
+        }?api_key=900220665f77fdeb07e6cd5211522470&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
@@ -53,38 +53,38 @@ const Search = () => {
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
-        <div className="search">
+        <div className='search'>
           <TextField
             style={{ flex: 1 }}
-            className="searchBox"
-            label="Search"
-            variant="filled"
+            className='searchBox'
+            label='Search'
+            variant='filled'
             onChange={(e) => setSearchText(e.target.value)}
           />
           <Button
             onClick={fetchSearch}
-            variant="contained"
+            variant='contained'
             style={{ marginLeft: 10 }}
           >
-            <SearchIcon fontSize="large" />
+            <SearchIcon fontSize='large' />
           </Button>
         </div>
         <Tabs
           value={type}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor='primary'
+          textColor='primary'
           onChange={(event, newValue) => {
             setType(newValue);
             setPage(1);
           }}
           style={{ paddingBottom: 5 }}
-          aria-label="disabled tabs example"
+          aria-label='disabled tabs example'
         >
-          <Tab style={{ width: "50%" }} label="Search Movies" />
-          <Tab style={{ width: "50%" }} label="Search TV Series" />
+          <Tab style={{ width: '50%' }} label='Search Movies' />
+          <Tab style={{ width: '50%' }} label='Search TV Series' />
         </Tabs>
       </ThemeProvider>
-      <div className="trending">
+      <div className='trending'>
         {content &&
           content.map((c) => (
             <SingleContent
@@ -93,7 +93,7 @@ const Search = () => {
               poster={c.poster_path}
               title={c.title || c.name}
               date={c.first_air_date || c.release_date}
-              media_type={type ? "tv" : "movie"}
+              media_type={type ? 'tv' : 'movie'}
               vote_average={c.vote_average}
             />
           ))}

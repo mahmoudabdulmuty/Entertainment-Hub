@@ -1,6 +1,6 @@
-import { Chip } from "@material-ui/core";
-import axios from "axios";
-import { useEffect } from "react";
+import { Chip } from '@material-ui/core';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const Genres = ({
   selectedGenres,
@@ -26,7 +26,7 @@ const Genres = ({
 
   const fetchGenres = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/${type}/list?api_key=900220665f77fdeb07e6cd5211522470&language=en-US`
     );
     setGenres(data.genres);
   };
@@ -41,15 +41,15 @@ const Genres = ({
   }, []);
 
   return (
-    <div style={{ padding: "6px 0" }}>
+    <div style={{ padding: '6px 0' }}>
       {selectedGenres.map((genre) => (
         <Chip
           style={{ margin: 2 }}
           label={genre.name}
           key={genre.id}
-          color="primary"
+          color='primary'
           clickable
-          size="small"
+          size='small'
           onDelete={() => handleRemove(genre)}
         />
       ))}
@@ -59,7 +59,7 @@ const Genres = ({
           label={genre.name}
           key={genre.id}
           clickable
-          size="small"
+          size='small'
           onClick={() => handleAdd(genre)}
         />
       ))}
