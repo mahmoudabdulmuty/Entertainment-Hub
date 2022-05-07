@@ -1,49 +1,30 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import './App.scss';
-import Home from './pages/Home';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header/Header";
+import SimpleBottomNavigation from "./components/MainNav";
+import Movies from "./Pages/Movies/Movies";
+import Series from "./Pages/Series/Series";
+import Trending from "./Pages/Trending/Trending";
+import Search from "./Pages/Search/Search";
+import { Container } from "@material-ui/core";
 
 function App() {
-	const [movies, setMovies] = useState([]);
-	const [searchQuery, setSearchQuery] = useState('');
-
-	const API_URL = 'https://api.themoviedb.org/3';
-
-	const fetchMovies = async (searchQuery) => {
-		const type = searchQuery ? 'search' : 'discover';
-
-		const {
-			data: { results }
-		} = await axios.get(`${API_URL}/${type}/movie`, {
-			params: {
-				api_key: process.env.REACT_APP_MOVIE_API_KEY,
-				query: searchQuery
-			}
-		});
-		setMovies(results);
-	};
-
-	useEffect(() => {
-		fetchMovies();
-	}, []);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		fetchMovies(searchQuery);
-	};
-
-	const handleQuery = (e) => {
-		setSearchQuery(e.target.value);
-	};
-
-	return (
-		<Home
-			searchQuery={searchQuery}
-			handleQuery={handleQuery}
-			handleSubmit={handleSubmit}
-			movies={movies}
-		/>
-	);
+  return (
+    <BrowserRouter>
+      <Header />
+      <div className="app">
+        <Container>
+          <Switch>
+            <Route path="/" component={Trending} exact />
+            <Route path="/movies" component={Movies} />
+            <Route path="/series" component={Series} />
+            <Route path="/search" component={Search} />
+          </Switch>
+        </Container>
+      </div>
+      <SimpleBottomNavigation />
+    </BrowserRouter>
+  );
 }
 
 export default App;
